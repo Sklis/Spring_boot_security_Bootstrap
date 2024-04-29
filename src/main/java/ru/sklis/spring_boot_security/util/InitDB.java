@@ -13,12 +13,12 @@ import java.util.Set;
 
 
 @Component
-public class Util {
+public class InitDB {
     private final UserService userService;
     private final RoleService roleService;
 
     @Autowired
-    public Util(UserService userService, RoleService roleService) {
+    public InitDB(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }

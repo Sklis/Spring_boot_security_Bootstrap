@@ -12,8 +12,12 @@ import ru.sklis.spring_boot_security.repository.UserRepository;
 @Service
 public class DaoUserDetails implements UserDetailsService {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public DaoUserDetails(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) {

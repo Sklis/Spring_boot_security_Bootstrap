@@ -1,21 +1,54 @@
 package ru.sklis.spring_boot_security.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.sklis.spring_boot_security.model.User;
+import ru.sklis.spring_boot_security.repository.UserRepository;
+
 
 import java.util.List;
 
+@Service
+@Transactional(readOnly = true)
+public class UserService {
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-public interface UserService {
-    List<User> findAll();
+    @Autowired
+    public UserService(UserRepository userRepository, @Lazy PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
-    User getById(Long id);
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
 
-    User findUserByUsername(String username);
+    public User getById(Long id) {
+        return userRepository.getById(id);
+    }
 
-    void save(User user);
+    public User findUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 
-    void deleteById(Long id);
+    @Transactional
+    public void save(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+    }
 
-    void update(User user);
+    @Transactional
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
+    }
 
+    @Transactional
+    public void update(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+    }
 }

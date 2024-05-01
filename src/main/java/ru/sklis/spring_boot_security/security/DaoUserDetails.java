@@ -21,7 +21,7 @@ public class DaoUserDetails implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) {
-        User user = userRepository.findByUsername(email);
+        User user = userRepository.findByEmail(email);
         if (user == null) {
             throw new UsernameNotFoundException(email);
         }

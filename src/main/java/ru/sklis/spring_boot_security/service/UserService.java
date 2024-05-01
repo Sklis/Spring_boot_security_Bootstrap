@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.sklis.spring_boot_security.model.User;
 import ru.sklis.spring_boot_security.repository.UserRepository;
 
-
 import java.util.List;
 
 @Service
@@ -27,12 +26,12 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getById(Long id) {
-        return userRepository.getById(id);
-    }
+//    public User getById(Long id) {
+//        return userRepository.getById(id);
+//    }
 
     public User findUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return userRepository.findByEmail(username);
     }
 
     @Transactional
@@ -44,11 +43,5 @@ public class UserService {
     @Transactional
     public void deleteById(Long id) {
         userRepository.deleteById(id);
-    }
-
-    @Transactional
-    public void update(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
     }
 }

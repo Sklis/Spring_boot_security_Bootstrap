@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import ru.sklis.spring_boot_security.model.Role;
 import ru.sklis.spring_boot_security.model.User;
 
-
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -57,6 +56,4 @@ public class UserPrincipal implements UserDetails, GrantedAuthority {
     public boolean isEnabled() {
         return true;
     }
-
-
 }

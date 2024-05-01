@@ -40,9 +40,8 @@ public class AuthController {
 
 
     @PostMapping("/edit/{id}")
-    public String updateUser(@PathVariable("id") Long id, @ModelAttribute("user") User user, @RequestParam("roles") Long[] rolesId) {
-        userService.update(user);
-
+    public String updateUser(@ModelAttribute("user") User user) {
+        userService.save(user);
         return "redirect:/admin";
     }
 

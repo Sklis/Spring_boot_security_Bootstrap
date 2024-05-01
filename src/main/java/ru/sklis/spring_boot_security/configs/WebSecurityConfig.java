@@ -1,5 +1,6 @@
 package ru.sklis.spring_boot_security.configs;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -18,7 +19,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final SuccessUserHandler successUserHandler;
     private final DaoUserDetails userService;
 
-
+    @Autowired
     public WebSecurityConfig(SuccessUserHandler successUserHandler, DaoUserDetails userService) {
         this.successUserHandler = successUserHandler;
         this.userService = userService;

@@ -28,7 +28,4 @@ public class RoleService {
 
     }
 
-    public Role showUserById(Long id) {
-        return roleRepository.getById(id);
-    }
 }
